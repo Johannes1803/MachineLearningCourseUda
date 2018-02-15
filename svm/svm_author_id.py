@@ -13,15 +13,40 @@ from time import time
 sys.path.append("../tools/")
 from email_preprocess import preprocess
 
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score
+
 
 ### features_train and features_test are the features for the training
 ### and testing datasets, respectively
 ### labels_train and labels_test are the corresponding item labels
 features_train, features_test, labels_train, labels_test = preprocess()
 
+clf = SVC(kernel='rbf', C=10000.0)
+
+#features_train = features_train[:len(features_train)/100]
+#labels_train = labels_train[:len(labels_train)/100]
+
+clf.fit(features_train, labels_train)
+
+pred = clf.predict(features_test)
+listChris = [x for x in pred if pred[x] == 1]
+numberChirs = len(listChris)
 
 
 
+accuracy2 = accuracy_score(labels_test, pred)
+print("predictions:")
+print (pred[10])
+print (pred[26])
+print (pred[50])
+
+
+print("accuracy: ")
+print(accuracy2)
+
+print("Chris Predictions: ")
+print(numberChirs)
 #########################################################
 ### your code goes here ###
 
