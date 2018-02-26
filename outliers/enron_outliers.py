@@ -15,6 +15,7 @@ data = featureFormat(data_dict, features)
 
 
 ### your code below
+# find outliers: people who made the most salary and highest bonuses
 greedy = []
 for (outer_k) in data_dict:
         person = data_dict[outer_k]
@@ -22,6 +23,19 @@ for (outer_k) in data_dict:
             greedy.append(outer_k)
 for item in greedy:
     print(item)
+
+stock_options = []
+for person in data_dict:
+    stock = data_dict[person]['exercised_stock_options']
+    if stock != 'NaN':
+        stock_options.append(stock)
+
+stock_options2 = [value['salary'] for key, value in data_dict.items()
+                  if value['salary'] != 'NaN']
+#for element in stock_options2:
+#    print (element)
+print(min(stock_options2))
+print(max(stock_options2))
 
 for point in data:
     salary = int(point[0])
